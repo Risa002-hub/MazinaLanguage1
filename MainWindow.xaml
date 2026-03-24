@@ -1,0 +1,22 @@
+﻿<Window x:Class="MazinaLanguage1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MazinaLanguage1"
+        mc:Ignorable="d"
+        Title="MainWindow" Background="#e7fabf" Height="450" Width="800" FontFamily=" Comic Sans MS" Icon="/ima/school_logo.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Image Source="/ima/school_logo.png" HorizontalAlignment="Left" />
+        <TextBlock Text="MazinaLanguage" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30"/>
+        <Button x:Name="BtnBack" Content="Back" Click="BtnBack_Click" Margin="10" Width="150" HorizontalAlignment="Right"/>
+        <Frame Grid.Row="1" Name="MainFrame" ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden">
+            
+        </Frame>
+    </Grid>
+</Window>
