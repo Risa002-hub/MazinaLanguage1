@@ -43,7 +43,18 @@ namespace MazinaLanguage1
                     return "";
             }
         }
-
+        public string LastVisitDateString
+        {
+            get
+            {
+                if (LastVisitDate.HasValue)
+                    return LastVisitDate.Value.ToString();
+                else
+                    return "Нет посещений";
+            }
+        }
+        public DateTime? LastVisitDate { get; set; }
+        public int VisitsCount { get; set; }
 
         public virtual Gender Gender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

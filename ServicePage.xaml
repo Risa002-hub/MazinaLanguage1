@@ -10,11 +10,25 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
         </Grid.RowDefinitions>
-        
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5">
+            <TextBox x:Name="SearchTextBox" Width="200" Margin="5" FontSize="15" TextChanged="SearchTextBox_TextChanged"/>
+            <ComboBox x:Name="GenderFilterComboBox" Width="120" Margin="5" FontSize="15" SelectionChanged="GenderFilterComboBox_SelectionChanged">
+                <ComboBoxItem>Все</ComboBoxItem>
+                <ComboBoxItem>Мужской</ComboBoxItem>
+                <ComboBoxItem>Женский</ComboBoxItem>
+            </ComboBox>
+            <ComboBox x:Name="SortComboBox" Width="250" Margin="5" FontSize="15" SelectionChanged="SortComboBox_SelectionChanged">
+                <ComboBoxItem>Фамилия А-Я</ComboBoxItem>
+                <ComboBoxItem>Последнее посещение по убыванию</ComboBoxItem>
+                <ComboBoxItem>Количество посещений по убыванию</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
         <ListView Name="ServiceListView" Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -60,7 +74,7 @@
                             <TextBlock Text="Пол: "/>
                              <TextBlock Text="{Binding GenderCode}"/>
                              <TextBlock Text="Дата Рождения: "/>
-                             <TextBlock Text="{Binding Birthday}"/>
+                             <TextBlock Text="{Binding Birthday, StringFormat=dd.MM.yyyy}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="2" FontSize="15">
                             <TextBlock Text="Тел.: "/>
@@ -73,14 +87,39 @@
                             <TextBlock  Text="{Binding RegistrationDateString}"/>
                         </TextBlock>
                         <TextBlock Grid.Column="1" Grid.Row="4" FontSize="15">
-                            <TextBlock Text=" Дата послед посещ: "/>
-                            <TextBlock Text=" Колич посещ: "/>
+                           <TextBlock Text="Дата последнего посещения: "/>
+                           <TextBlock Text="{Binding LastVisitDateString}" Margin="5,0,15,0"/>
+                           <TextBlock Text="Количество посещений: "/>
+                           <TextBlock Text="{Binding VisitsCount}"/>
                         </TextBlock>
+                        <TextBlock Grid.Column="2">
+                            <Button x:Name="DeleteButton" Content="Удалить клиента" Height="30" Click="DeleteButton_Click"/>
+                            <Button x:Name="AddEsitButton" Content="Изменить" Click="AddEditItem_Click"/>
+                        </TextBlock>
+                        
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <ComboBox x:Name="PageSizeComboBox" Width="80" Margin="5" FontSize="15" SelectionChanged="PageSizeComboBox_SelectionChanged">
+                <ComboBoxItem>10</ComboBoxItem>
+                <ComboBoxItem>50</ComboBoxItem>
+                <ComboBoxItem>200</ComboBoxItem>
+                <ComboBoxItem>Все</ComboBoxItem>
+            </ComboBox>
+            <Label x:Name="InfoLabel" Content="0 из 0" FontSize="16" VerticalAlignment="Center"  Margin="0,0,10,0"/>
+            <Button x:Name="LeftButton" Content="&lt;" Width="40" Height="30" Click="LeftButton_Click" Margin="2"/>
+            <ListBox x:Name="PageListBox" FontSize="14" MouseUp="PageListBox_MouseUp" Height="30" VerticalAlignment="Center">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ListBox>
+            <Button x:Name="RightButton" Content="&gt;" Width="30" Click="RightButton_Click" Margin="2"/>
+        </StackPanel>
 
     </Grid>
 </Page>
